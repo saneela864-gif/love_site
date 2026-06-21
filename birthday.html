@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love 💖</title>
+
+<style>
+body {
+  text-align: center;
+  background: white;
+  font-family: Arial;
+  overflow: hidden;
+}
+
+#bear1 {
+  width: 220px;
+  display: block;
+  margin: 80px auto 20px auto;
+}
+
+h1 {
+  margin-top: 30px;
+  font-size: 48px;
+}
+
+button {
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+#buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+#yes {
+  background: pink;
+}
+
+#no {
+  background: lightgray;
+  position: absolute;
+}
+
+#bear2 {
+  display: none;
+  width: 250px;
+  margin: 0 auto 20px auto;
+}
+
+#result {
+  display: none;
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#result h1 {
+  font-size: 55px;
+  margin-top: 20px;
+}
+.heart {
+  position: absolute;
+  color: hotpink;
+  font-size: 35px;
+  animation: fall 5s linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10px); }
+  100% { transform: translateY(100vh); }
+}
+</style>
+
+</head>
+
+<body>
+
+
+<img id="bear1" src="bear1.gif" width="200">
+
+<h1 id="question">Hey Ahmad!Do you love Saneela? 🥺</h1>
+
+<br>
+<div id="buttons">
+  <button id="yes" onclick="yesClick()">Yes 💖</button>
+  <button id="no">No 😭</button>
+</div>
+
+<div id="result">
+    <img id="bear2" src="bear2.gif" width="200"><br><br>
+    <h1>Yesss! I knew it ❤️🥹</h1>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+// NO BUTTON BHAGTA 😈
+let noBtn = document.getElementById("no");
+
+// Start position (Yes ke sath same line)
+noBtn.style.left = "55%";
+noBtn.style.top = "470px";
+
+// Music start
+window.onload = function () {
+  document.getElementById("music").play().catch(() => {});
+};
+
+document.addEventListener("click", function () {
+  document.getElementById("music").play();
+}, { once: true });
+
+function moveNo() {
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 100);
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
+// mobile + pc
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseover", moveNo);
+
+// YES CLICK 💖
+function yesClick() {
+
+  document.getElementById("bear1").style.display = "none";
+  document.getElementById("question").style.display = "none";
+
+  document.getElementById("yes").style.display = "none";
+  document.getElementById("no").style.display = "none";
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("bear2").style.display = "block";
+
+  document.getElementById("music").play();
+
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 100);
+}
+</script>
+
+</body>
+</html>
